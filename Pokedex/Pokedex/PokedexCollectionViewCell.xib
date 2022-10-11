@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokedexCollectionViewCell" id="gTV-IL-0wX" customClass="PokedexCollectionViewCell" customModule="Pokedex" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="135" height="125"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="135" height="125"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S10-a4-CE9">
+                        <rect key="frame" x="0.0" y="0.0" width="135" height="100"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HC-gy-mVY">
+                        <rect key="frame" x="5" y="105" width="125" height="15"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="S10-a4-CE9" secondAttribute="trailing" id="8fq-U6-Htz"/>
+                <constraint firstAttribute="bottom" secondItem="S10-a4-CE9" secondAttribute="bottom" constant="25" id="dcA-Zg-aez"/>
+                <constraint firstItem="9HC-gy-mVY" firstAttribute="top" secondItem="S10-a4-CE9" secondAttribute="bottom" constant="5" id="eiS-z0-Ts0"/>
+                <constraint firstItem="S10-a4-CE9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fdS-zq-Oqk"/>
+                <constraint firstAttribute="bottom" secondItem="9HC-gy-mVY" secondAttribute="bottom" constant="5" id="itc-KD-VvY"/>
+                <constraint firstItem="S10-a4-CE9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mWU-yE-Tcu"/>
+                <constraint firstAttribute="trailing" secondItem="9HC-gy-mVY" secondAttribute="trailing" constant="5" id="zpw-GP-Fx3"/>
+                <constraint firstItem="9HC-gy-mVY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="zxD-Rs-1PZ"/>
+            </constraints>
+            <size key="customSize" width="135" height="125"/>
+            <connections>
+                <outlet property="imagePoke" destination="S10-a4-CE9" id="hTe-Pw-0Cp"/>
+                <outlet property="titlePoke" destination="9HC-gy-mVY" id="jpt-as-8LE"/>
+            </connections>
+            <point key="canvasLocation" x="199.27536231884059" y="122.87946428571428"/>
+        </collectionViewCell>
+    </objects>
+</document>
