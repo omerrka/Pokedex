@@ -15,6 +15,13 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        navigationController?.navigationBar.barTintColor = UIColor.red
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .red
+        navigationController?.navigationBar.standardAppearance = appearance;
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+
         view.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -58,8 +65,8 @@ extension ViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokedexCollectionViewCell", for: indexPath) as! PokedexCollectionViewCell
         cell.titlePoke.text = (pokeData[indexPath.row].name).capitalized
-        
-        
+        cell.imagePoke.clipsToBounds = true
+        cell.imagePoke.layer.cornerRadius = cell.imagePoke.frame.height / 5
         cell.imagePoke.clipsToBounds = true
         cell.imagePoke.kf.indicatorType = .activity
         cell.imagePoke.kf.setImage(with: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(indexPath.row + 1).png"), placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil)
