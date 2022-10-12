@@ -17,12 +17,12 @@ struct MyResult: Codable {
 
 }
 
-struct Poke: Codable {
-    let sprites: YourResult
+struct Answer: Codable {
+    let stats: [YourResult]
 }
 
 struct YourResult: Codable {
-    let back_default: String
+    let base_stat: Int
 
   
 }
