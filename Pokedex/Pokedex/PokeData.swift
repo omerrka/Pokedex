@@ -6,7 +6,7 @@ import Foundation
 
 struct Response: Codable {
     let results: [MyResult]
-    
+
 }
 
 
@@ -14,6 +14,7 @@ struct MyResult: Codable {
     let name: String
     let url: String
     
+
 }
 
 struct Poke: Codable {
@@ -21,8 +22,8 @@ struct Poke: Codable {
 }
 
 struct YourResult: Codable {
-    let front_default: String
-   
+    let back_default: String
+
   
 }
 
