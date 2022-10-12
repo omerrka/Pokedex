@@ -43,9 +43,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         detailManager.getDetailData(number: 1) {
             data in
             self.pokeDetail = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
         }
         
         let nibCell = UINib(nibName: "PokedexCollectionViewCell", bundle: nil)
@@ -60,6 +60,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         detailManager.getDetailData(number: indexPath.row + 1) {
             data in
             self.pokeDetail = data
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
             
             
         }
@@ -67,7 +70,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         let vc1 = storyboard?.instantiateViewController(withIdentifier: "PokeDetailVC") as? PokeDetailVC
         vc1?.pokeName = pokeData[indexPath.row].name
         vc1?.pokeImage = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(indexPath.row + 1).png"
-        
+        vc1?.pokeAttack = pokeDetail[1].base_stat
+        vc1?.pokeHealth = pokeDetail[0].base_stat
+        vc1?.pokeDefence = pokeDetail[2].base_stat
+        vc1?.pokeSpa = pokeDetail[3].base_stat
+        vc1?.pokeSpd = pokeDetail[4].base_stat
+        vc1?.pokeSpeed = pokeDetail[5].base_stat
+        print(indexPath.row)
+
         self.navigationController?.pushViewController(vc1!, animated: true)
         
     }

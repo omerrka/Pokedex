@@ -187,7 +187,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="aJF-PG-ndA"/>
                     <connections>
+                        <outlet property="attack" destination="MCO-lG-6PS" id="gdm-sz-oXA"/>
+                        <outlet property="defence" destination="FgV-o6-SPI" id="7AC-or-40x"/>
+                        <outlet property="health" destination="6Zh-W2-8EG" id="3js-Yf-uGY"/>
                         <outlet property="image" destination="NQT-8a-faT" id="rmF-jK-hGt"/>
+                        <outlet property="name" destination="nXw-WN-zxp" id="Pm3-cf-9wz"/>
+                        <outlet property="spa" destination="XvZ-FC-XLf" id="l5v-z3-svg"/>
+                        <outlet property="spd" destination="suh-Po-h4F" id="dUD-Lg-7rP"/>
+                        <outlet property="speed" destination="apg-Fv-E9m" id="8AD-7P-bjn"/>
+                        <outlet property="type" destination="5o7-Co-buS" id="23Q-iX-teJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgS-Fq-ydK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
