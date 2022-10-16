@@ -3,6 +3,8 @@ import UIKit
 
 class PokeDetailVC: UIViewController {
     
+ 
+    var pokeUrl: String = ""
     var pokeName: String = ""
     var pokeType: String = ""
     var pokeAttack: Int = 0
@@ -28,12 +30,7 @@ class PokeDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        attack.text = String(pokeAttack)
-        defence.text = String(pokeDefence)
-        speed.text = String(pokeSpeed)
-        spa.text = String(pokeSpa)
-        spd.text = String(pokeSpd)
-        health.text = String(pokeHealth)
+        
         image.kf.indicatorType = .activity
         image.kf.setImage(with: URL(string: "\(pokeImage)"), placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil)
         

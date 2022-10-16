@@ -2,14 +2,12 @@
 import UIKit
 import Kingfisher
 
-class ViewController: UIViewController, UICollectionViewDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelDelegate {
     
-    var detailManager = DetailManager()
-    var pokeManager = PokeManager()
-    var pokeData = [MyResult]()
-    var pokeDetail = [YourResult]()
-    var page = 0
-    var fetchingMore = false
+    
+    let pokedexViewModel: PokedexViewModel = PokedexViewModel()
+    //    var pokeManager = PokeManager()
+    //    var pokeDetail = [YourResult]()
     
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -17,6 +15,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        setupViews()
+        pokedexViewModel.delegate = self
+        pokedexViewModel.fetchData()
+        
+    }
+    
+    private func setupViews() {
+        
         navigationController?.navigationBar.barTintColor = UIColor.red
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -32,52 +38,20 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         let width = (self.view.frame.size.width - 20) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
-        
-        pokeManager.getData(offset: page) {
-            data in
-            self.pokeData = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-        detailManager.getDetailData(number: 1) {
-            data in
-            self.pokeDetail = data
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//            }
-        }
-        
         let nibCell = UINib(nibName: "PokedexCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: "PokedexCollectionViewCell")
         
         
-        
-        
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        detailManager.getDetailData(number: indexPath.row + 1) {
-            data in
-            self.pokeDetail = data
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-            
-            
-        }
+        
         
         let vc1 = storyboard?.instantiateViewController(withIdentifier: "PokeDetailVC") as? PokeDetailVC
-        vc1?.pokeName = pokeData[indexPath.row].name
+        vc1?.pokeName = pokedexViewModel.pokeData[indexPath.row].name
         vc1?.pokeImage = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(indexPath.row + 1).png"
-        vc1?.pokeAttack = pokeDetail[1].base_stat
-        vc1?.pokeHealth = pokeDetail[0].base_stat
-        vc1?.pokeDefence = pokeDetail[2].base_stat
-        vc1?.pokeSpa = pokeDetail[3].base_stat
-        vc1?.pokeSpd = pokeDetail[4].base_stat
-        vc1?.pokeSpeed = pokeDetail[5].base_stat
-        print(indexPath.row)
-
+        vc1?.pokeUrl = pokedexViewModel.pokeData[indexPath.row].url
         self.navigationController?.pushViewController(vc1!, animated: true)
         
     }
@@ -85,13 +59,13 @@ class ViewController: UIViewController, UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokeData.count
+        return pokedexViewModel.pokeData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokedexCollectionViewCell", for: indexPath) as! PokedexCollectionViewCell
-        cell.titlePoke.text = (pokeData[indexPath.row].name).capitalized
+        cell.titlePoke.text = (pokedexViewModel.pokeData[indexPath.row].name).capitalized
         cell.imagePoke.clipsToBounds = true
         cell.imagePoke.layer.cornerRadius = cell.imagePoke.frame.height / 5
         cell.imagePoke.kf.indicatorType = .activity
@@ -105,27 +79,18 @@ extension ViewController: UICollectionViewDataSource {
         
         if contentHeight > 0 {
             if offsetY > contentHeight - scrollView.frame.height {
-                if !fetchingMore {
-                    beginBatchFetch()
-                    
+                if !pokedexViewModel.fetchingMore {
+                    pokedexViewModel.beginBatchFetch()
                 }
             }
         }
     }
     
-    func beginBatchFetch() {
-        fetchingMore = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 , execute: {
-            self.page += 20
-            self.pokeManager.getData(offset: self.page) {
-                data in
-                self.pokeData.append(contentsOf: data)
-                self.fetchingMore = false
-            }
+    func callFinished() {
+        DispatchQueue.main.async {
             self.collectionView.reloadData()
             
-        })
+        }
     }
 }
 
