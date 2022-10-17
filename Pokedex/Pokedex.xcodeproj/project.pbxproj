@@ -56,6 +56,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27419BA528FDD0F300673E81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27419BA928FDD15400673E81 /* Controller */,
+				27F33CC128F30524008DB3E4 /* PokedexCollectionViewCell.xib */,
+				27F33CC028F30524008DB3E4 /* PokedexCollectionViewCell.swift */,
+				27F33CB228F2FFED008DB3E4 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		27419BA628FDD11700673E81 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				27419BA728FDD13500673E81 /* Networking */,
+				277D71B528F84DE400F2B15F /* PokedexViewModel.swift */,
+				277D71B728F85D9500F2B15F /* PokeDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		27419BA728FDD13500673E81 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				27F33CC628F307DF008DB3E4 /* PokeManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		27419BA828FDD14400673E81 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27F33CC428F30782008DB3E4 /* PokeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		27419BA928FDD15400673E81 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2706EAC928F708DF0067A1D7 /* PokeDetailViewController.swift */,
+				27F33CB028F2FFED008DB3E4 /* PokedexViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		27F33CA028F2FFED008DB3E4 = {
 			isa = PBXGroup;
 			children = (
@@ -77,20 +123,14 @@
 		27F33CAB28F2FFED008DB3E4 /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
-				27F33CAC28F2FFED008DB3E4 /* AppDelegate.swift */,
-				27F33CAE28F2FFED008DB3E4 /* SceneDelegate.swift */,
-				27F33CB228F2FFED008DB3E4 /* Main.storyboard */,
+				27419BA828FDD14400673E81 /* Model */,
+				27419BA628FDD11700673E81 /* ViewModel */,
+				27419BA528FDD0F300673E81 /* View */,
 				27F33CB528F2FFEE008DB3E4 /* Assets.xcassets */,
 				27F33CB728F2FFEE008DB3E4 /* LaunchScreen.storyboard */,
+				27F33CAE28F2FFED008DB3E4 /* SceneDelegate.swift */,
+				27F33CAC28F2FFED008DB3E4 /* AppDelegate.swift */,
 				27F33CBA28F2FFEE008DB3E4 /* Info.plist */,
-				27F33CB028F2FFED008DB3E4 /* PokedexViewController.swift */,
-				277D71B528F84DE400F2B15F /* PokedexViewModel.swift */,
-				2706EAC928F708DF0067A1D7 /* PokeDetailViewController.swift */,
-				277D71B728F85D9500F2B15F /* PokeDetailViewModel.swift */,
-				27F33CC028F30524008DB3E4 /* PokedexCollectionViewCell.swift */,
-				27F33CC128F30524008DB3E4 /* PokedexCollectionViewCell.xib */,
-				27F33CC428F30782008DB3E4 /* PokeModel.swift */,
-				27F33CC628F307DF008DB3E4 /* PokeManager.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
