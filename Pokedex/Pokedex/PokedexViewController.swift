@@ -4,10 +4,7 @@ import Kingfisher
 
 class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelDelegate {
     
-    
     let pokedexViewModel: PokedexViewModel = PokedexViewModel()
-    //    var pokeManager = PokeManager()
-    //    var pokeDetail = [YourResult]()
     
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -20,6 +17,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelD
         pokedexViewModel.fetchData()
         
     }
+    
     
     private func setupViews() {
         
@@ -45,8 +43,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
         
         let vc1 = storyboard?.instantiateViewController(withIdentifier: "PokeDetailVC") as? PokeDetailVC
         vc1?.pokeName = pokedexViewModel.pokeData[indexPath.row].name

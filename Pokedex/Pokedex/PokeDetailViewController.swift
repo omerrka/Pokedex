@@ -1,9 +1,11 @@
 
 import UIKit
 
+
 class PokeDetailVC: UIViewController {
     
- 
+    let pokeDetailViewModel: PokeDetailViewModel = PokeDetailViewModel()
+    
     var pokeUrl: String = ""
     var pokeName: String = ""
     var pokeType: String = ""
@@ -15,7 +17,6 @@ class PokeDetailVC: UIViewController {
     var pokeSpa: Int = 0
     var pokeSpd: Int = 0
     
-
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var type: UILabel!
@@ -26,17 +27,28 @@ class PokeDetailVC: UIViewController {
     @IBOutlet weak var spa: UILabel!
     @IBOutlet weak var spd: UILabel!
     
- 
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.pokeDetailViewModel.fetchDetailData(point: pokeUrl)
+        
+        health.text = String(pokeDetailViewModel.pokeDetailData[0].base_stat)
+        
         image.kf.indicatorType = .activity
         image.kf.setImage(with: URL(string: "\(pokeImage)"), placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil)
-        
     }
-    
-
-   
-
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,27 @@
-//
-//  PokeDetailViewModel.swift
-//  Pokedex
-//
-//  Created by Aybike Zeynep Tiryaki on 13.10.2022.
-//
 
 import Foundation
+
+class PokeDetailViewModel {
+    
+    
+    var point: String = ""
+    var pokeDetailData = [YourResult]()
+    init() {}
+    
+    func fetchDetailData(point: String) {
+        
+        
+        PokeManager.shared.getDetailData(link: point) { data in
+            self.pokeDetailData = data
+            
+        }
+    }
+}
+
+
+
+
+
+    
+    
+

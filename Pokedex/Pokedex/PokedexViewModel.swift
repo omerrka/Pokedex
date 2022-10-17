@@ -13,7 +13,6 @@ class PokedexViewModel {
     var page = 0
     var pokeData = [MyResult]()
     var pokeManager = PokeManager()
-    var pokeDetail = [YourResult]()
     var fetchingMore = false
     var delegate : PokeViewModelDelegate?
     init() {}
