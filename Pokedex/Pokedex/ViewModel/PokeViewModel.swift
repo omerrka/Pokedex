@@ -19,13 +19,13 @@ class PokedexViewModel {
     
     func fetchData() {
         
-        PokeManager.shared.getData(offset: page) { data in
-            self.pokeData = data
-            self.delegate?.callFinished()
+        if page == 0 {
+            PokeManager.shared.getData(offset: page) { data in
+                self.pokeData = data
+                self.delegate?.callFinished()
+            }
         }
-    }
-    
-    func beginBatchFetch() {
+        
         fetchingMore = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 , execute: {
@@ -33,11 +33,8 @@ class PokedexViewModel {
             PokeManager.shared.getData(offset: self.page) { data in
                 self.pokeData.append(contentsOf: data)
                 self.fetchingMore = false
-
             }
             self.delegate?.callFinished()
-
-            
         })
     }
 }

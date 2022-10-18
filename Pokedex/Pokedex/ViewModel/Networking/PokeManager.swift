@@ -20,7 +20,7 @@ class PokeManager {
                 }
                 
                     do {
-                        let result = try JSONDecoder().decode(Response.self, from: data)
+                        let result = try JSONDecoder().decode(PokeNames.self, from: data)
                         comp(result.results)
                         
                     }
@@ -46,8 +46,30 @@ class PokeManager {
             }
 
                 do {
-                    let result = try JSONDecoder().decode(Answer.self, from: data)
+                    let result = try JSONDecoder().decode(PokeStats.self, from: data)
                     comp(result.stats)
+                    print(result)
+                }
+                catch {
+                    print("failed to convert")
+                }
+
+        } .resume()
+    }
+    
+    func getTypeData(link: String, comp : @escaping (String)->()) {
+
+        let url = link
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error  in
+            guard let data = data, error == nil else {
+                print("something get wrong")
+                return
+            }
+
+                do {
+                    let result = try JSONDecoder().decode(PokeStats.self, from: data)
+                    comp(result.types[0].type.name)
+                    
                 }
                 catch {
                     print("failed to convert")
