@@ -24,7 +24,7 @@ class PokeDetailViewModel {
             
         }
     }
-//    
+
     func fetchTypeData(point: String) {
         
         PokeManager.shared.getTypeData(link: point) { data in

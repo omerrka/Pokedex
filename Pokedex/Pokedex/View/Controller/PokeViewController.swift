@@ -2,19 +2,23 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelDelegate {
+    func callFinished() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
     
     let pokedexViewModel: PokedexViewModel = PokedexViewModel()
-    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         setupViews()
         pokedexViewModel.delegate = self
         pokedexViewModel.fetchData()
-            
+        
     }
     
     
@@ -60,10 +64,10 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokedexCollectionViewCell", for: indexPath) as! PokedexCollectionViewCell
         cell.setupName(with: pokedexViewModel.pokeData[indexPath.row])
         cell.setupImage(index: indexPath.row)
+        
         return cell
     }
     
@@ -75,20 +79,12 @@ extension ViewController: UICollectionViewDataSource {
             if offsetY > contentHeight - scrollView.frame.height {
                 if !pokedexViewModel.fetchingMore {
                     pokedexViewModel.fetchData()
+                    if !pokedexViewModel.fetchingMore {
+                        pokedexViewModel.fetchData()
+                        
+                    }
                 }
             }
         }
     }
-    
-    func callFinished() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-            
-        }
-    }
 }
-
-
-
-
-
