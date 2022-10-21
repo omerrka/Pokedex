@@ -3,7 +3,6 @@ import Foundation
 
 protocol DetailViewModelDelegate {
     func callLaunched()
-    func callTypeLaunched()
 }
 
 
@@ -11,29 +10,18 @@ class PokeDetailViewModel {
     
     var detailDelegate: DetailViewModelDelegate?
     var point: String = ""
-    var pokeDetailData = [YourResult]()
+    var pokeDetailData: PokeStats?
     var pokeTypeData = String()
-    init() {}
+    //    init() {}
     
-    func fetchDetailData(point: String) {
+    func fetchDetailData(url: String) {
         
-        
-        PokeManager.shared.getDetailData(link: point) { data in
+        PokeManager.shared.getDetailData(url: url) { data in
             self.pokeDetailData = data
             self.detailDelegate?.callLaunched()
             
         }
     }
-
-    func fetchTypeData(point: String) {
-        
-        PokeManager.shared.getTypeData(link: point) { data in
-            self.pokeTypeData = data
-            self.detailDelegate?.callTypeLaunched()
-
-        }
-    }
-    
 }
 
 

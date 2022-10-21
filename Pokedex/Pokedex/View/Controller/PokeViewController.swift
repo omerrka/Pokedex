@@ -1,13 +1,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelDelegate {
-    func callFinished() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    
+class ViewController: UIViewController, UICollectionViewDelegate {
     
     let pokedexViewModel: PokedexViewModel = PokedexViewModel()
     
@@ -56,8 +50,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, PokeViewModelD
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource, PokeViewModelDelegate {
     
+    func callFinished() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pokedexViewModel.pokeData.count
@@ -65,9 +64,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokedexCollectionViewCell", for: indexPath) as! PokedexCollectionViewCell
-        cell.setupName(with: pokedexViewModel.pokeData[indexPath.row])
-        cell.setupImage(index: indexPath.row)
-        
+        cell.setupName(poke: pokedexViewModel.pokeData[indexPath.row], index: indexPath.row)
         return cell
     }
     

@@ -1,40 +1,42 @@
 
-
-
 import Foundation
 
 protocol PokeViewModelDelegate {
     func callFinished()
 }
 
-
 class PokedexViewModel {
     
     var page = 0
-    var pokeData = [MyResult]()
+    var pokeData = [Results]()
     var pokeManager = PokeManager()
     var fetchingMore = false
     var delegate : PokeViewModelDelegate?
     init() {}
     
+    
     func fetchData() {
         
-        if page == 0 {
-            PokeManager.shared.getData(offset: page) { data in
+        self.fetchingMore = true
+        
+        PokeManager.shared.getData(offset: page) { data in
+            if self.page == 0 {
                 self.pokeData = data
+                
                 self.delegate?.callFinished()
             }
-        }
-        
-        fetchingMore = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 , execute: {
-            self.page += 20
-            PokeManager.shared.getData(offset: self.page) { data in
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 , execute: {
                 self.pokeData.append(contentsOf: data)
                 self.fetchingMore = false
-            }
-            self.delegate?.callFinished()
-        })
+                
+                self.delegate?.callFinished()
+            })
+        }
+        
+        page += 20
     }
 }
+
+
+

@@ -1,20 +1,13 @@
 
-
-
-
 import Foundation
 
 struct PokeNames: Codable {
-    let results: [MyResult]
-    
+    let results: [Results]
 }
 
-
-struct MyResult: Codable {
+struct Results: Codable {
     let name: String
     let url: String
-    
-    
 }
 
 
